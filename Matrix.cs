@@ -37,10 +37,22 @@ namespace MatrixAlgebra
 
             Matrix<T> result = new Matrix<T>(left.rows, right.columns);
 
-            for(int i = 0; i<left.rows)
 
+            //rows == columns
+            for (int i = 0; i < left.rows; i++)
+            {
+                for (int k = 0; k < right.columns; k++)
+                {
+                    T result_cell_value = default(T);
+                    for (int j = 0; j < left.columns; j++)
+                    {
+                        result_cell_value += (dynamic)left[i,j] * right[j,k];
+                    }
+                    result[i, k] = result_cell_value;
+                }
+            }
 
-            return null;
+            return result;
         }
 
 
