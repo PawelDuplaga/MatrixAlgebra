@@ -32,7 +32,12 @@ namespace MatrixAlgebra
 
         public static Matrix<T> operator * (Matrix<T> left, Matrix<T> right)
         {
+            if (left.columns != right.rows)
+                throw new ArgumentException("Number of columns of the first matrix must be the same as number of rows of the second matrix");
 
+            Matrix<T> result = new Matrix<T>(left.rows, right.columns);
+
+            for(int i = 0; i<left.rows)
 
 
             return null;
@@ -41,3 +46,4 @@ namespace MatrixAlgebra
 
     }
 }
+
