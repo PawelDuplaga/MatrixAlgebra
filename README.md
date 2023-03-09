@@ -1,5 +1,3 @@
-# MatrixAlgebra
-
 Matrix Algebra Library in C#
 This library is designed for matrix algebra, especially for neural networks. The implementation is done using C# programming language.
 
@@ -23,10 +21,10 @@ This creates a new 3x3 matrix with integer values.
 
 You can also create a new matrix from an existing 2D array:
 
-csharp
-Copy code
+```csharp
 int[,] data = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-Matrix<int> m = new Matrix<int>(data);
+Matrix<int> m = new Matrix<int>(data);\
+```
 Accessing Matrix Elements
 You can access matrix elements using the indexing operator:
 
