@@ -149,8 +149,8 @@ namespace MatrixAlgebraSpace
 
         public T Determinant()
         {
-            int size1 = this.columns;
-            int size2 = this.rows;
+            int size1 = this.rows;
+            int size2 = this.columns;
 
             if (size1 == 1 && size2 == 1)
             {
@@ -166,7 +166,7 @@ namespace MatrixAlgebraSpace
 
                 for (int j = 0; j < size1; j++)
                 {
-                    T[,] submatrix = new T[size1 - 1, size1 - 1];
+                    T[,] submatrix = new T[size1 - 1, size2 - 1];
 
                     for (int i = 1; i < size1; i++)
                     {
@@ -183,7 +183,8 @@ namespace MatrixAlgebraSpace
                         }
                     }
 
-                    det += Math.Pow(-1, j) * (dynamic)this[0, j] * this.Determinant();
+                    Matrix<T> subMatrixObj = new Matrix<T>(submatrix);
+                    det += Math.Pow(-1, j) * (dynamic)this[0, j] * subMatrixObj.Determinant();
                 }
 
                 return (dynamic)det;
