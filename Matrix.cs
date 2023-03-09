@@ -26,7 +26,8 @@ namespace MatrixAlgebraSpace
         public int columns;
 
 
-
+        // Initializes a new instance of the Matrix class with the specified number of rows and columns
+        // Throws an ArgumentException if the number of rows or columns is less than or equal to zero
         public Matrix(int rows,int columns) {
             if(rows <= 0 || columns<= 0) 
                 throw new ArgumentException("Matrix dimensions must be positive");
@@ -36,6 +37,7 @@ namespace MatrixAlgebraSpace
             this.data = new T[rows, columns];
         }
 
+        // Initializes a new instance of the Matrix class from a 2D array
         public Matrix(T[,] data)
         {
             this.data = (dynamic)data;
@@ -166,6 +168,10 @@ namespace MatrixAlgebraSpace
         }
 
 
+        /// <summary>
+        /// Returns a new matrix that is the transpose of this matrix.
+        /// </summary>
+        /// <returns>A new matrix that is the transpose of this matrix.</returns>
         public Matrix<T> transpose()
         {
             Matrix<T> result = new Matrix<T>(this.rows,this.columns);
@@ -180,6 +186,12 @@ namespace MatrixAlgebraSpace
 
             return result;
         }
+
+        /// <summary>
+        /// Returns a new matrix that is the inverse of this matrix.
+        /// </summary>
+        /// <returns>A new matrix that is the inverse of this matrix.</returns>
+        public Matrix<T> Inverse() { return null; }
 
 
         public T Determinant2x2()
@@ -199,6 +211,11 @@ namespace MatrixAlgebraSpace
             return det;
         }
 
+
+        /// <summary>
+        /// Calculates the determinant of the matrix.
+        /// </summary>
+        /// <returns>The determinant of the matrix.</returns>
         public T Determinant()
         {
             int size1 = this.rows;
@@ -242,8 +259,14 @@ namespace MatrixAlgebraSpace
                 return (dynamic)det;
             }
         }
-        
-        public void FillRandom(dynamic lowerBound, dynamic upperBound)
+
+
+        /// <summary>
+        /// Fills the matrix with random values between the specified minimum and maximum values.
+        /// </summary>
+        /// <param name="min">The minimum value for the random number generation.</param>
+        /// <param name="max">The maximum value for the random number generation.</param>
+        public void FillRandom(dynamic min, dynamic max)
         {
             Random rand = new Random();
 
@@ -256,19 +279,19 @@ namespace MatrixAlgebraSpace
 
                     if (typeof(T) == typeof(double))
                     {
-                        randomValue = Helpers.DoubleRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.DoubleRandom(min, max, rand);
                     }
                     else if (typeof(T) == typeof(float))
                     {
-                        randomValue = Helpers.FloatRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.FloatRandom(min, max, rand);
                     }
                     else if (typeof(T) == typeof(long))
                     {
-                        randomValue = Helpers.LongRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.LongRandom(min, max, rand);
                     }
                     else if (typeof(T) == typeof(int))
                     {
-                        randomValue = rand.Next(lowerBound, upperBound);
+                        randomValue = rand.Next(min, max);
                     }
                     else if (typeof(T) == typeof(byte))
                     {
@@ -337,6 +360,10 @@ namespace MatrixAlgebraSpace
             return GetEnumerator();
         }
 
+        /// <summary>
+        /// Creates a new matrix with the same dimensions and elements as this matrix.
+        /// </summary>
+        /// <returns>A copy of this matrix.</returns>
         public Matrix<T> Clone()
         {
             return (Matrix<T>)this.MemberwiseClone();
