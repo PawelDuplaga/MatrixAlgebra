@@ -12,56 +12,57 @@ Build the project using your favorite IDE or by running dotnet build command in 
 Reference the resulting DLL file in your own project
 Usage
 Creating a Matrix
-To create a new matrix, use the following code:
 
-csharp
-Copy code
+To create a new matrix, use the following code:
+```csharp
 Matrix<int> m = new Matrix<int>(3, 3);
 This creates a new 3x3 matrix with integer values.
 
 You can also create a new matrix from an existing 2D array:
-
 ```csharp
 int[,] data = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-Matrix<int> m = new Matrix<int>(data);\
+Matrix<int> m = new Matrix<int>(data);
 ```
 Accessing Matrix Elements
 You can access matrix elements using the indexing operator:
-
-csharp
-Copy code
+```csharp
 int element = m[0, 0];
+```
 Matrix Arithmetic
 The library supports basic arithmetic operations on matrices, including addition, subtraction, and multiplication. Here are some examples:
-
-csharp
-Copy code
+```csharp
 Matrix<int> a = new Matrix<int>(2, 2);
 Matrix<int> b = new Matrix<int>(2, 2);
+```
 
 // matrix addition
+```csharp
 Matrix<int> c = a + b;
+```
 
 // matrix subtraction
+```csharp
 Matrix<int> d = a - b;
+```
 
 // matrix multiplication
+```csharp
 Matrix<int> e = a * b;
+```
+
 Transpose
 You can also calculate the transpose of a matrix:
-
-csharp
-Copy code
+```csharp
 Matrix<int> a = new Matrix<int>(2, 3);
-
 Matrix<int> b = a.Transpose();
+```
+
 Determinant
 Finally, you can calculate the determinant of a 2x2 matrix:
-
-csharp
-Copy code
+```csharp
 Matrix<int> a = new Matrix<int>(2, 2);
-
 int determinant = a.Determinant2x2();
+```
+
 Authors
 Pawel Duplaga - GitHub
