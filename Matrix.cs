@@ -81,11 +81,49 @@ namespace MatrixAlgebraSpace
         {
             Matrix<T> result = new Matrix<T>(matrix.rows, matrix.columns);
 
-            for (int i = 0; i < matrix.rows; i++)
+            for (int i = 0; i < result.rows; i++)
             {
-                for (int k = 0; k < matrix.columns; k++)
+                for (int k = 0; k < result.columns; k++)
                 {
-                    result[i,k] *= value;
+                    if(typeof(T) == typeof(int))
+                    {
+                        result[i, k] = Convert.ToInt32(Math.Round((dynamic)matrix[i, k] * (double)value));
+                    }
+                    else if(typeof(T) == typeof(long))
+                    {
+                        result[i, k] = Convert.ToInt64(Math.Round((dynamic)matrix[i, k] * (double)value));
+                    }
+                    else
+                    {
+                        result[i, k] = matrix[i, k] * value;
+                    }
+
+                }
+            }
+            return result;
+        }
+
+        public static Matrix<T> operator *(dynamic value, Matrix<T> matrix)
+        {
+            Matrix<T> result = new Matrix<T>(matrix.rows, matrix.columns);
+
+            for (int i = 0; i < result.rows; i++)
+            {
+                for (int k = 0; k < result.columns; k++)
+                {
+                    if (typeof(T) == typeof(int))
+                    {
+                        result[i, k] = Convert.ToInt32(Math.Round((dynamic)matrix[i, k] * (double)value));
+                    }
+                    else if (typeof(T) == typeof(long))
+                    {
+                        result[i, k] = Convert.ToInt64(Math.Round((dynamic)matrix[i, k] * (double)value));
+                    }
+                    else
+                    {
+                        result[i, k] = matrix[i, k] * value;
+                    }
+
                 }
             }
             return result;
