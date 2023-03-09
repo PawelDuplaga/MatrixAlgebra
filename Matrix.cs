@@ -199,27 +199,32 @@ namespace MatrixAlgebraSpace
             {
                 for(int k = 0;k < this.columns; k++)
                 {
+
+                    dynamic randomValue = default(T);
+
                     if (typeof(T) == typeof(double))
                     {
-                        this[i, k] = Helpers.DoubleRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.DoubleRandom(lowerBound, upperBound, rand);
                     }
                     else if (typeof(T) == typeof(float))
                     {
-                        this[i, k] = Helpers.FloatRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.FloatRandom(lowerBound, upperBound, rand);
                     }
                     else if (typeof(T) == typeof(long))
                     {
-                        this[i, k] = Helpers.LongRandom(lowerBound, upperBound, rand);
+                        randomValue = Helpers.LongRandom(lowerBound, upperBound, rand);
                     }
                     else if (typeof(T) == typeof(int))
                     {
-                        this[i, k] = rand.Next(lowerBound, upperBound);
+                        randomValue = rand.Next(lowerBound, upperBound);
                     }
                     else if (typeof(T) == typeof(byte))
                     {
                         throw new ArgumentException("this library doesnt operate on bytes");
                     }
                     else throw new ArgumentException("Ups, something went wrong");
+
+                    this[i, k] = randomValue;
                 }
             }
         }
