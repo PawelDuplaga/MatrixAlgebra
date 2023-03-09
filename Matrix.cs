@@ -134,6 +134,66 @@ namespace MatrixAlgebraSpace
         }
 
 
+        public T Determinant2x2()
+        {
+            if (this.columns != 2 && this.rows != 2)
+                throw new ArgumentException("this method is for 2x2 matrixes only");
+
+            T a = this[0, 0];
+            T b = this[0, 1];
+            T c = this[1, 0];
+            T d = this[1, 1];
+
+            dynamic ad = (dynamic)a * d;
+            dynamic bc = (dynamic)b * c;
+            dynamic det = ad - bc;
+
+            return det;
+        }
+
+        public T Determinant()
+        {
+            int size1 = this.columns;
+            int size2 = this.rows;
+
+            if (size1 == 1 && size2 == 1)
+            {
+                return this[0,0];
+            }
+            else if (size1 == 2 && size2 == 2)
+            {
+                return this.Determinant2x2();
+            }
+            else
+            {
+                double det = 0;
+
+                for (int j = 0; j < size1; j++)
+                {
+                    T[,] submatrix = new T[size1 - 1, size1 - 1];
+
+                    for (int i = 1; i < size1; i++)
+                    {
+                        for (int k = 0; k < size1; k++)
+                        {
+                            if (k < j)
+                            {
+                                submatrix[i - 1, k] = (dynamic)this[i, k];
+                            }
+                            else if (k > j)
+                            {
+                                submatrix[i - 1, k - 1] = (dynamic)this[i, k];
+                            }
+                        }
+                    }
+
+                    det += Math.Pow(-1, j) * (dynamic)this[0, j] * this.Determinant();
+                }
+
+                return (dynamic)det;
+            }
+        }
+
 
 
         public IEnumerator<T> GetEnumerator()
