@@ -76,6 +76,20 @@ namespace MatrixAlgebraSpace
 
             return result;
         }
+        a
+        public static Matrix<T> operator * (Matrix<T> matrix, dynamic value)
+        {
+            Matrix<T> result = new Matrix<T>(matrix.rows, matrix.columns);
+
+            for (int i = 0; i < matrix.rows; i++)
+            {
+                for (int k = 0; k < matrix.columns; k++)
+                {
+                    result[i,k] *= value;
+                }
+            }
+            return result;
+        }
 
         public static Matrix<T> operator + (Matrix<T> left, Matrix<T> right)
         {
@@ -122,11 +136,11 @@ namespace MatrixAlgebraSpace
             {
                 for (int k = 0; k < result.rows; k++)
                 {
-                    result[i, k] = this[result.rows - i - 1, result.columns - i - 1];
+                    result[i, k] = this[this.rows - i - 1, this.columns - k - 1];
                 }
             }
 
-            return this;
+            return result;
         }
 
 
