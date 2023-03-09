@@ -76,7 +76,7 @@ namespace MatrixAlgebraSpace
 
             return result;
         }
-        a
+
         public static Matrix<T> operator * (Matrix<T> matrix, dynamic value)
         {
             Matrix<T> result = new Matrix<T>(matrix.rows, matrix.columns);
