@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 // Simple matrix library by Pawel Duplaga
@@ -13,7 +10,7 @@ using System.Threading.Tasks;
 /*=============================================================================
 **
 **
-** Purpose: Matrix mathematics 
+** Purpose: Matrix algebra ( especially for neural networks  )
 **
 **
 =============================================================================*/
@@ -193,7 +190,39 @@ namespace MatrixAlgebraSpace
                 return (dynamic)det;
             }
         }
+        
+        public void FillRandom(dynamic lowerBound, dynamic upperBound)
+        {
+            Random rand = new Random();
 
+            for(int i = 0; i < this.rows; i++)
+            {
+                for(int k = 0;k < this.columns; k++)
+                {
+                    if (typeof(T) == typeof(double))
+                    {
+                        this[i, k] = Helpers.DoubleRandom(lowerBound, upperBound, rand);
+                    }
+                    else if (typeof(T) == typeof(float))
+                    {
+                        this[i, k] = Helpers.FloatRandom(lowerBound, upperBound, rand);
+                    }
+                    else if (typeof(T) == typeof(long))
+                    {
+                        this[i, k] = Helpers.LongRandom(lowerBound, upperBound, rand);
+                    }
+                    else if (typeof(T) == typeof(int))
+                    {
+                        this[i, k] = rand.Next(lowerBound, upperBound);
+                    }
+                    else if (typeof(T) == typeof(byte))
+                    {
+                        throw new ArgumentException("this library doesnt operate on bytes");
+                    }
+                    else throw new ArgumentException("Ups, something went wrong");
+                }
+            }
+        }
 
 
         public IEnumerator<T> GetEnumerator()
@@ -208,6 +237,33 @@ namespace MatrixAlgebraSpace
         {
             return GetEnumerator();
         }
+
+
+        private static class Helpers{
+
+            public static long LongRandom(long min, long max, Random rand)
+            {
+                byte[] buf = new byte[8];
+                rand.NextBytes(buf);
+                long longRand = BitConverter.ToInt64(buf, 0);
+
+                return (Math.Abs(longRand % (max - min)) + min);
+            }
+
+            public static double DoubleRandom(double min, double max, Random rand)
+            {
+                return rand.NextDouble() * (max - min) + min;
+            }
+
+            public static float FloatRandom(float min, float max, Random rand)
+            {
+                return (float)rand.NextDouble() * (max - min) + min;
+            }
+
+
+        }
+
+
 
     }
 }
