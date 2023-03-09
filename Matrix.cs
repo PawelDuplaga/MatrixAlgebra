@@ -6,6 +6,19 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+
+// Simple matrix library by Pawel Duplaga
+// Its mediocre but its mine
+
+/*=============================================================================
+**
+**
+** Purpose: Matrix mathematics 
+**
+**
+=============================================================================*/
+
+
 namespace MatrixAlgebraSpace
 {
     public class Matrix<T> : IEnumerable<T> where T : struct, IConvertible, IComparable
@@ -26,27 +39,20 @@ namespace MatrixAlgebraSpace
             this.data = new T[rows, columns];
         }
 
+        public Matrix(T[,] data)
+        {
+            this.data = data;
+        }
+
         public T this[int row, int column]
         {
             get => data[row, column];
             set => data[row, column] = value;
         }
 
-        public Matrix(T[][] jaggedArray)
-        {
-            int rows = jaggedArray.Length;
-            int columns = jaggedArray[0].Length;
-            data = new T[rows, columns];
 
-            for (int i = 0; i < rows; i++)
-            {
-                for (int k = 0; k < columns; k++)
-                {
-                    data[i, k] = jaggedArray[i][k];
-                }
-            }
-        }
 
+       
         public static Matrix<T> operator * (Matrix<T> left, Matrix<T> right)
         {
             if (left.columns != right.rows)
