@@ -38,7 +38,9 @@ namespace MatrixAlgebraSpace
 
         public Matrix(T[,] data)
         {
-            this.data = data;
+            this.data = (dynamic)data;
+            this.rows = data.GetLength(0);
+            this.columns = data.GetLength(1);
         }
 
         public T this[int row, int column]
@@ -123,9 +125,6 @@ namespace MatrixAlgebraSpace
                     result[i, k] = this[result.rows - i - 1, result.columns - i - 1];
                 }
             }
-
-
-
 
             return this;
         }
@@ -228,6 +227,48 @@ namespace MatrixAlgebraSpace
                 }
             }
         }
+
+        public void FillWithValue(T value)
+        {
+            for (int i = 0; i < this.rows; i++)
+            {
+                for (int k = 0; k < this.columns; k++)
+                {
+                    this[i,k] = value;
+                }
+            }
+        }
+
+
+        public void Print()
+        {
+
+            // Find the length of the longest element
+            int maxLength = 0;
+            for (int i = 0; i < this.rows; i++)
+            {
+                for (int j = 0; j < this.columns; j++)
+                {
+                    int length = this[i, j].ToString().Length;
+                    if (length > maxLength)
+                    {
+                        maxLength = length;
+                    }
+                }
+            }
+
+            // Print the array with even spacing
+            for (int i = 0; i < this.rows; i++)
+            {
+                for (int j = 0; j < this.columns; j++)
+                {
+                    string element = this[i, j].ToString();
+                    Console.Write(element.PadLeft(maxLength) + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
 
 
         public IEnumerator<T> GetEnumerator()
