@@ -70,7 +70,25 @@ namespace MatrixAlgebra
                 }
             }
 
-            return null;
+            return result;
+        }
+
+        public static Matrix<T> operator - (Matrix<T> left, Matrix<T> right)
+        {
+            if (left.columns != right.columns || left.rows != right.rows)
+                throw new ArgumentException("Numbers of columns and rows must be the same in both matrixes");
+
+            Matrix<T> result = new Matrix<T>(left.rows, left.columns);
+
+            for (int i = 0; i < left.columns; i++)
+            {
+                for (int k = 0; k < left.rows; k++)
+                {
+                    result[i, k] = (dynamic)left[i, k] - right[i, k];
+                }
+            }
+
+            return result;
         }
 
     }
