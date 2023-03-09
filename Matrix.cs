@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MatrixAlgebra
+namespace MatrixAlgebraSpace
 {
-    internal class Matrix<T> where T : struct, IConvertible, IComparable
+    public class Matrix<T> : IEnumerable<T> where T : struct, IConvertible, IComparable
     {
 
-        private T[,]? data;
+        private readonly T[,]? data;
         public int rows;
         public int columns;
 
@@ -26,8 +28,23 @@ namespace MatrixAlgebra
 
         public T this[int row, int column]
         {
-            get { return data[row, column]; }
-            set { data[row, column] = value; }
+            get => data[row, column];
+            set => data[row, column] = value;
+        }
+
+        public Matrix(T[][] jaggedArray)
+        {
+            int rows = jaggedArray.Length;
+            int columns = jaggedArray[0].Length;
+            data = new T[rows, columns];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int k = 0; k < columns; k++)
+                {
+                    data[i, k] = jaggedArray[i][k];
+                }
+            }
         }
 
         public static Matrix<T> operator * (Matrix<T> left, Matrix<T> right)
@@ -89,6 +106,41 @@ namespace MatrixAlgebra
             }
 
             return result;
+        }
+
+
+        public Matrix<T> transpose()
+        {
+            Matrix<T> result = new Matrix<T>(this.rows,this.columns);
+
+            for (int i = 0; i < result.columns; i++)
+            {
+                for (int k = 0; k < result.rows; k++)
+                {
+                    result[i, k] = this[result.rows - i - 1, result.columns - i - 1];
+                }
+            }
+
+
+
+
+            return this;
+        }
+
+
+
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var value in data)
+            {
+                yield return value;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
     }
