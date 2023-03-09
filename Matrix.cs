@@ -293,7 +293,7 @@ namespace MatrixAlgebraSpace
         }
 
 
-        public void Print()
+        public void PrintMatrix()
         {
 
             // Find the length of the longest element
@@ -337,6 +337,10 @@ namespace MatrixAlgebraSpace
             return GetEnumerator();
         }
 
+        public Matrix<T> Clone()
+        {
+            return (Matrix<T>)this.MemberwiseClone();
+        }
 
         private static class Helpers{
 
