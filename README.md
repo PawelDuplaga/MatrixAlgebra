@@ -7,36 +7,37 @@ To use this library, you need the following software installed on your computer:
 
 .NET 5
 Installation
-Clone the repository or download the source code
-Build the project using your favorite IDE or by running dotnet build command in the project directory
-Reference the resulting DLL file in your own project
-Usage
-Creating a Matrix
+1. Clone the repository or download the source code
+2. Build the project using your favorite IDE or by running dotnet build command in the project directory
+3. Reference the resulting DLL file in your own project
 
-####To create a new matrix, use the following code:
+
+# Usage <br>
+### Creating a Matrix <br>
+#### To create a new matrix, use the following code:
 ```csharp
 Matrix<int> m = new Matrix<int>(3, 3);
 This creates a new 3x3 matrix with integer values.
 ```
 
-####You can also create a new matrix from an existing 2D array:
+#### You can also create a new matrix from an existing 2D array:
 ```csharp
 int[,] data = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
 Matrix<int> m = new Matrix<int>(data);
 ```
-###Accessing Matrix Elements
-####You can access matrix elements using the indexing operator:
+### Accessing Matrix Elements <br>
+#### You can access matrix elements using the indexing operator:
 ```csharp
 int element = m[0, 0];
 ```
-###Matrix Arithmetic
-####The library supports basic arithmetic operations on matrices, including addition, subtraction, and multiplication. Here are some examples:
+### Matrix Arithmetic <br>
+#### The library supports basic arithmetic operations on matrices, including addition, subtraction, and multiplication. Here are some examples:
 ```csharp
 Matrix<int> a = new Matrix<int>(2, 2);
 Matrix<int> b = new Matrix<int>(2, 2);
 ```
 
-###Matrix addition
+### Matrix addition
 ```csharp
 Matrix<int> c = a + b;
 ```
